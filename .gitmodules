@@ -1,0 +1,6 @@
+[submodule "spring-kafka-poc-producer"]
+	path = spring-kafka-poc-producer
+	url = https://github.com/tatomarchioli/spring-kafka-poc-producer.git
+[submodule "spring-kafka-poc-consumer"]
+	path = spring-kafka-poc-consumer
+	url = https://github.com/tatomarchioli/spring-kafka-poc-consumer.git
