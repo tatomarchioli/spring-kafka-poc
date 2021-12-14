@@ -24,17 +24,31 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop:latest
+  schema-registry:
+    image: confluentinc/cp-schema-registry:5.4.0
+    hostname: schema-registry
+    container_name: schema-registry
     networks: 
       - broker-kafka
     depends_on:
       - kafka
     ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: "zookeeper:2181"
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    networks: 
+      - broker-kafka
+    depends_on:
+      - schema-registry
+    ports:
       - 19000:9000
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
-
+      SCHEMAREGISTRY_CONNECT: schema-registry:8081
 networks: 
   broker-kafka:
     driver: bridge  
