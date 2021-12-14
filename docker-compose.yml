@@ -48,7 +48,7 @@ services:
       - 19000:9000
     environment:
       KAFKA_BROKERCONNECT: kafka:29092
-      SCHEMAREGISTRY_CONNECT: schema-registry:8081
+      SCHEMAREGISTRY_CONNECT: http://schema-registry:8081
 networks: 
   broker-kafka:
     driver: bridge  
